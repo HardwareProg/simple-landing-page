@@ -1,131 +1,102 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet">
-
-    <title>Sandhika Galih</title>
-  </head>
-  <body>
-
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <a class="navbar-brand" href="#">Sandhika</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link" href="#">About</a>
-            <a class="nav-item nav-link btn btn-primary text-white tombol" href="#">Join Us</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- akhir Navbar -->
-
-    <!-- Jumbotron -->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Get work done <span>faster</span> <br>and <span>better</span> with us</h1>
-        <a href="#" class="btn btn-info btn-lg tombol">View Our Work</a>
-      </div>
-    </div>
-    <!-- akhir Jumbotron -->
-
-
-    <!-- container -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قاعات الأفراح في ليبيا | Wedding Venues in Libya</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .venue-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .venue-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .venue-info {
+            margin-top: 15px;
+        }
+        .venue-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .venue-location {
+            color: #666;
+            margin: 5px 0;
+        }
+        .venue-contact {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
     <div class="container">
+        <h1>قاعات الأفراح في ليبيا<br>
+            <small>Wedding Venues in Libya</small>
+        </h1>
 
-      <!-- info panel -->
-      <div class="row justify-content-center">
-        <div class="col-10 info-panel">
-          <div class="row">
-            <div class="col-sm">
-              <img src="img/employee.png" alt="Employee" class="img-fluid float-left">
-              <h4>24 Hours</h4>
-              <p>Lorem ipsum dolor sit amet.</p>
+        <div class="venue-grid">
+            <div class="venue-card">
+                <img src="https://placehold.co/300x200" alt="قاعة الأميرة">
+                <div class="venue-info">
+                    <div class="venue-name">قاعة الأميرة</div>
+                    <div class="venue-location">طرابلس - شارع الظهرة</div>
+                    <div class="venue-contact">هاتف: 218-91-1234567+</div>
+                </div>
             </div>
-            <div class="col-lg">
-              <img src="img/hires.png" alt="HiRes" class="img-fluid float-left">
-              <h4>High-Res</h4>
-              <p>Lorem ipsum dolor sit amet.</p>
+
+            <div class="venue-card">
+                <img src="https://placehold.co/300x200" alt="قصر الأفراح">
+                <div class="venue-info">
+                    <div class="venue-name">قصر الأفراح</div>
+                    <div class="venue-location">بنغازي - شارع الجلاء</div>
+                    <div class="venue-contact">هاتف: 218-92-7654321+</div>
+                </div>
             </div>
-            <div class="col-lg">
-              <img src="img/security.png" alt="Security" class="img-fluid float-left">
-              <h4>Security</h4>
-              <p>Lorem ipsum dolor sit amet.</p>
+
+            <div class="venue-card">
+                <img src="https://placehold.co/300x200" alt="قاعة النورس">
+                <div class="venue-info">
+                    <div class="venue-name">قاعة النورس</div>
+                    <div class="venue-location">مصراتة - شارع طرابلس</div>
+                    <div class="venue-contact">هاتف: 218-94-9876543+</div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- akhir info panel -->
 
-
-      <!-- Workingspace -->
-      <div class="row workingspace">
-        <div class="col-lg-6">
-          <img src="img/workingspace.png" alt="Working Space" class="img-fluid">
+            <div class="venue-card">
+                <img src="https://placehold.co/300x200" alt="قاعة الياسمين">
+                <div class="venue-info">
+                    <div class="venue-name">قاعة الياسمين</div>
+                    <div class="venue-location">سبها - وسط المدينة</div>
+                    <div class="venue-contact">هاتف: 218-95-3456789+</div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-5">
-          <h2>You <span>Work</span> Like at <span>Home</span></h2>
-          <p>Bekerja dengan suasana hati yang lebih asik, menyenangkan
-            dan mempelajari hal baru setiap harinya.</p>
-          <a href="#" class="btn btn-danger tombol">Gallery</a>
-        </div>
-      </div>
-      <!-- akhir Workingspace -->
-
-
-      <!-- Testimonial -->
-      <section class="testimonial">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <p>"Bekerja dengan suasana hati yang lebih asik dan mempelajari hal baru setiap harinya."</p>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-6 justify-content-center d-flex">
-            <img src="img/img1.png" alt="Testimonial 1">
-            <img src="img/img2.png" alt="Testimonial 2" class="img-main">
-            <img src="img/img3.png" alt="Testimonial 3">
-          </div>
-        </div>
-        <div class="row justify-content-center info-text">
-          <div class="col-lg text-center">
-            <h5>Sunny Ye</h5>
-            <p>Designer</p>
-          </div>
-        </div>
-      </section>
-      <!-- akhir Testimonial -->
-
-
     </div>
-    <!-- akhir container -->
-
-
-
-
-    
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>

@@ -14,28 +14,23 @@
   var hotspotsLayer = L.layerGroup().addTo(map);
 
   // ---- NOC facilities layer ----
-  fetch('data/noc_facilities.json')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      data.facilities.forEach(function (f) {
-        var marker = L.circleMarker([f.lat, f.lng], {
-          radius: 7,
-          color: '#2dd4bf',
-          fillColor: '#2dd4bf',
-          fillOpacity: 0.6,
-          weight: 2
-        });
-        marker.bindPopup(
-          '<strong>' + f.name + '</strong><br>' +
-          f.subsidiary + '<br>' +
-          '<em>' + f.type + '</em>' +
-          (f.note ? '<br><small>' + f.note + '</small>' : '') +
-          '<br><small>Indicative location — verify against primary sources.</small>'
-        );
-        marker.addTo(facilitiesLayer);
-      });
-    })
-    .catch(function (err) { console.error('Failed to load NOC facilities', err); });
+  window.NOC_FACILITIES_DATA.facilities.forEach(function (f) {
+    var marker = L.circleMarker([f.lat, f.lng], {
+      radius: 7,
+      color: '#2dd4bf',
+      fillColor: '#2dd4bf',
+      fillOpacity: 0.6,
+      weight: 2
+    });
+    marker.bindPopup(
+      '<strong>' + f.name + '</strong><br>' +
+      f.subsidiary + '<br>' +
+      '<em>' + f.type + '</em>' +
+      (f.note ? '<br><small>' + f.note + '</small>' : '') +
+      '<br><small>Indicative location — verify against primary sources.</small>'
+    );
+    marker.addTo(facilitiesLayer);
+  });
 
   document.getElementById('toggleFacilities').addEventListener('change', function (e) {
     if (e.target.checked) map.addLayer(facilitiesLayer);
@@ -72,13 +67,21 @@
     var firmsUrl = 'https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + encodeURIComponent(key) +
       '/VIIRS_SNPP_NRT/' + bbox + '/7';
 
+    if (window.location.protocol === 'file:') {
+      firmsStatus.textContent = 'This page is open from a local file (file://) — browsers block cross-origin requests from file:// pages. Serve the page over http(s) (e.g. the GitHub Pages link) to load live hotspots.';
+      return;
+    }
+
     // FIRMS' area/csv endpoint frequently omits CORS headers, which makes a direct
     // browser fetch() fail with an opaque network error before the response (and any
-    // real HTTP status / key error) is ever seen. Try direct first, then fall back to
-    // a CORS-relay so a real error (bad key, no data) can actually surface.
+    // real HTTP status / key error) is ever seen. Try direct first, then fall back
+    // through CORS relays so a real error (bad key, no data) can actually surface.
     fetchText(firmsUrl)
       .catch(function () {
         return fetchText('https://corsproxy.io/?url=' + encodeURIComponent(firmsUrl));
+      })
+      .catch(function () {
+        return fetchText('https://api.allorigins.win/raw?url=' + encodeURIComponent(firmsUrl));
       })
       .then(function (csvText) {
         if (/^\s*<!DOCTYPE|^\s*<html/i.test(csvText)) {
@@ -141,9 +144,8 @@
   }
 
   // ---- World Bank flaring trend chart ----
-  fetch('data/worldbank_flaring.json')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
+  (function () {
+      var data = window.WORLDBANK_FLARING_DATA;
       var years = data.series.map(function (d) { return d.year; });
       var values = data.series.map(function (d) { return d.bcm; });
 
@@ -190,6 +192,5 @@
           '<small>' + m.detail + ' — ' + m.source + '</small>';
         milestonesEl.appendChild(div);
       });
-    })
-    .catch(function (err) { console.error('Failed to load flaring trend data', err); });
+  })();
 })();

@@ -69,18 +69,24 @@
     hotspotsLayer.clearLayers();
 
     var bbox = [LIBYA_BBOX.west, LIBYA_BBOX.south, LIBYA_BBOX.east, LIBYA_BBOX.north].join(',');
-    var url = 'https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + encodeURIComponent(key) +
+    var firmsUrl = 'https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + encodeURIComponent(key) +
       '/VIIRS_SNPP_NRT/' + bbox + '/7';
 
-    fetch(url)
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.text();
+    // FIRMS' area/csv endpoint frequently omits CORS headers, which makes a direct
+    // browser fetch() fail with an opaque network error before the response (and any
+    // real HTTP status / key error) is ever seen. Try direct first, then fall back to
+    // a CORS-relay so a real error (bad key, no data) can actually surface.
+    fetchText(firmsUrl)
+      .catch(function () {
+        return fetchText('https://corsproxy.io/?url=' + encodeURIComponent(firmsUrl));
       })
       .then(function (csvText) {
+        if (/^\s*<!DOCTYPE|^\s*<html/i.test(csvText)) {
+          throw new Error('Received an HTML error page instead of CSV — MAP_KEY is likely invalid or rate-limited.');
+        }
         var rows = parseCsv(csvText);
         if (!rows.length) {
-          firmsStatus.textContent = 'No hotspots returned (or invalid key).';
+          firmsStatus.textContent = 'No hotspots in the last 7 days for this area (key worked, zero detections).';
           return;
         }
         rows.forEach(function (row) {
@@ -108,8 +114,15 @@
       })
       .catch(function (err) {
         console.error(err);
-        firmsStatus.textContent = 'Failed to load FIRMS data (check your MAP_KEY).';
+        firmsStatus.textContent = 'Failed to load FIRMS data: ' + err.message;
       });
+  }
+
+  function fetchText(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    });
   }
 
   function parseCsv(text) {

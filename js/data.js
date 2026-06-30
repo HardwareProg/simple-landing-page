@@ -1,5 +1,12 @@
 // Inlined as plain JS (instead of fetched JSON) so the page also works when
 // opened directly from disk (file://), where fetch() of local files is blocked.
+
+// Default NASA FIRMS MAP_KEY so visitors see live hotspots with no setup.
+// This key is public (visible in page source / git history) and shared by
+// every visitor against its 5,000-transactions/10-min account limit.
+// Visitors can still override it with their own key via the UI field.
+window.FIRMS_DEFAULT_MAP_KEY = 'a3a81b48a614a8637ca835890a1bfb80';
+
 window.NOC_FACILITIES_DATA = {
   "_meta": {
     "description": "Indicative locations of major National Oil Corporation (NOC) of Libya subsidiaries, fields and terminals associated with flaring risk. Coordinates are approximate facility/field centroids compiled from public geological and industry references (Wikipedia, Global Energy Monitor, USGS Sirte Basin studies, AGOCO/NOC public materials) and are intended for general orientation only — they are NOT derived from satellite flare detections and should be verified against primary sources before use in formal analysis.",

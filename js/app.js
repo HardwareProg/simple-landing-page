@@ -44,7 +44,7 @@
   // ---- NASA FIRMS hotspots layer ----
   var firmsStatus = document.getElementById('firmsStatus');
   var firmsKeyInput = document.getElementById('firmsKey');
-  var savedKey = window.localStorage.getItem('firmsMapKey');
+  var savedKey = window.localStorage.getItem('firmsMapKey') || window.FIRMS_DEFAULT_MAP_KEY;
   if (savedKey) firmsKeyInput.value = savedKey;
 
   document.getElementById('firmsKeySave').addEventListener('click', function () {

@@ -1,102 +1,76 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قاعات الأفراح في ليبيا | Wedding Venues in Libya</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .venue-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .venue-card {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .venue-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-        .venue-info {
-            margin-top: 15px;
-        }
-        .venue-name {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .venue-location {
-            color: #666;
-            margin: 5px 0;
-        }
-        .venue-contact {
-            color: #2980b9;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libya Gas Flaring Watch — NOC Zero Flaring by 2030 Tracker</title>
+<meta name="description" content="Interactive map and dashboard tracking gas flaring in Libya, for academic research and public awareness of NOC's commitment to Zero Routine Flaring by 2030.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>قاعات الأفراح في ليبيا<br>
-            <small>Wedding Venues in Libya</small>
-        </h1>
 
-        <div class="venue-grid">
-            <div class="venue-card">
-                <img src="https://placehold.co/300x200" alt="قاعة الأميرة">
-                <div class="venue-info">
-                    <div class="venue-name">قاعة الأميرة</div>
-                    <div class="venue-location">طرابلس - شارع الظهرة</div>
-                    <div class="venue-contact">هاتف: 218-91-1234567+</div>
-                </div>
-            </div>
+<header class="topbar">
+  <div class="brand">
+    <h1>Libya Gas Flaring Watch</h1>
+    <p>Tracking progress toward NOC's commitment to <strong>Zero Routine Flaring by 2030</strong></p>
+  </div>
+  <nav class="topbar-links">
+    <a href="#map">Map</a>
+    <a href="#trend">Flaring Trend</a>
+    <a href="#sources">Data Sources</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-            <div class="venue-card">
-                <img src="https://placehold.co/300x200" alt="قصر الأفراح">
-                <div class="venue-info">
-                    <div class="venue-name">قصر الأفراح</div>
-                    <div class="venue-location">بنغازي - شارع الجلاء</div>
-                    <div class="venue-contact">هاتف: 218-92-7654321+</div>
-                </div>
-            </div>
+<section class="firms-key-bar">
+  <label for="firmsKey">NASA FIRMS MAP_KEY (free, for live hotspot layer):</label>
+  <input type="text" id="firmsKey" placeholder="paste your FIRMS MAP_KEY here">
+  <button id="firmsKeySave">Save &amp; Load Hotspots</button>
+  <a class="get-key-link" href="https://firms.modaps.eosdis.nasa.gov/api/map_key/" target="_blank" rel="noopener">Get a free key →</a>
+  <span id="firmsStatus" class="firms-status"></span>
+</section>
 
-            <div class="venue-card">
-                <img src="https://placehold.co/300x200" alt="قاعة النورس">
-                <div class="venue-info">
-                    <div class="venue-name">قاعة النورس</div>
-                    <div class="venue-location">مصراتة - شارع طرابلس</div>
-                    <div class="venue-contact">هاتف: 218-94-9876543+</div>
-                </div>
-            </div>
+<main id="map" class="map-wrap">
+  <div id="leafletMap"></div>
+  <aside class="legend">
+    <h3>Layers</h3>
+    <label><input type="checkbox" id="toggleFacilities" checked> NOC fields / terminals (indicative)</label>
+    <label><input type="checkbox" id="toggleHotspots" checked> NASA FIRMS thermal hotspots (live, last 7 days)</label>
+    <p class="legend-note">Thermal hotspots include all fire/heat sources detected by VIIRS satellites (gas flares, wildfires, agricultural burning). They are a proxy for flaring activity, not a confirmed flare count. Cross-reference with <a href="https://eogdata.mines.edu/products/vnf/" target="_blank" rel="noopener">EOG VIIRS Nightfire</a> for flare-specific volumetric estimates.</p>
+  </aside>
+</main>
 
-            <div class="venue-card">
-                <img src="https://placehold.co/300x200" alt="قاعة الياسمين">
-                <div class="venue-info">
-                    <div class="venue-name">قاعة الياسمين</div>
-                    <div class="venue-location">سبها - وسط المدينة</div>
-                    <div class="venue-contact">هاتف: 218-95-3456789+</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<section id="trend" class="panel">
+  <h2>Libya National Flaring Volume vs. ZRF 2030 Target</h2>
+  <canvas id="trendChart" height="120"></canvas>
+  <p class="chart-caption">Only years with a directly verified World Bank GGFR figure are plotted; gaps are intentionally left blank rather than estimated. See <a href="#sources">Data Sources</a> for the full official dataset.</p>
+  <div id="milestones"></div>
+</section>
+
+<section id="sources" class="panel">
+  <h2>Data Sources</h2>
+  <ul class="source-list">
+    <li><a href="https://flaring.skytruth.org/?zoom=4.854&lat=29.058&lng=19.164&view=volume" target="_blank" rel="noopener">SkyTruth Global Gas Flaring Viewer</a> — visual, satellite-derived global flare volume map (VIIRS-based).</li>
+    <li><a href="https://eogdata.mines.edu/products/vnf/" target="_blank" rel="noopener">EOG VIIRS Nightfire (VNF)</a> — source dataset behind most flare-volume estimates; per-flare temperature, radiant heat and estimated gas volume. Bulk/API access requires a registered account, so it is not embedded live here — use it directly for primary-source verification.</li>
+    <li><a href="https://firms.modaps.eosdis.nasa.gov/map/#d:today;@20.5,27.9,6.4z" target="_blank" rel="noopener">NASA FIRMS</a> — near real-time active fire/thermal anomaly detections (MODIS/VIIRS). Powers the live hotspot layer above (requires a free MAP_KEY).</li>
+    <li><a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" rel="noopener">World Bank Global Gas Flaring Data (GGFR/GFMR)</a> — official annual country-level flaring volumes, basis of the trend chart above.</li>
+    <li><a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030/about" target="_blank" rel="noopener">World Bank Zero Routine Flaring by 2030 (ZRF) Initiative</a> — the commitment this project tracks NOC and Libya against.</li>
+  </ul>
+</section>
+
+<section id="about" class="panel">
+  <h2>About this project</h2>
+  <p>This page is an independent, non-commercial research and public-awareness tool. It combines publicly available satellite flare/thermal detection data with World Bank flaring statistics to help evaluate whether Libya's National Oil Corporation (NOC) and its subsidiaries are making measurable progress toward their <strong>Zero Routine Flaring by 2030</strong> commitment, formally joined on 30 April 2026.</p>
+  <p class="caveat"><strong>Methodological caveats:</strong> NOC field/terminal locations shown on the map are approximate, compiled from public geological references, and are not official NOC facility boundaries. Thermal hotspots are a proxy signal, not a verified flare or volume count — confirming an actual flare requires VIIRS Nightfire (VNF) analysis. No data shown here is fabricated or interpolated; missing values are left blank. Users conducting formal research should verify all figures against primary sources linked above.</p>
+</section>
+
+<footer class="site-footer">
+  <p>Built for academic research and public awareness. Not affiliated with NOC, the World Bank, NASA, SkyTruth, or EOG.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

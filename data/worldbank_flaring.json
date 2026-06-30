@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "description": "Libya annual gas flaring volume, billion cubic meters (bcm), as reported by the World Bank Global Gas Flaring Reduction (GGFR) / Global Flaring and Methane Reduction Partnership (GFMR) satellite-based flaring tracker. Only years with a directly verified, citable figure are included — gaps are left out rather than estimated, to avoid presenting invented numbers. Visit https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data for the complete official dataset.",
+    "unit": "bcm (billion cubic meters)",
+    "lastReviewed": "2026-06-30"
+  },
+  "series": [
+    { "year": 2012, "bcm": 5.9, "source": "World Bank GGFR Global Gas Flaring Tracker" },
+    { "year": 2020, "bcm": 2.5, "source": "World Bank GGFR Global Gas Flaring Tracker" },
+    { "year": 2022, "bcm": 5.4, "source": "World Bank GGFR Global Gas Flaring Tracker" },
+    { "year": 2023, "bcm": 6.8, "source": "World Bank GGFR: +1.4 bcm (+25%) reported vs. 2022", "approx": true },
+    { "year": 2024, "bcm": 6.3, "source": "World Bank GFMR / press reporting on Libya's ZRF accession, May 2026" }
+  ],
+  "milestones": [
+    {
+      "date": "2026-04-30",
+      "label": "Libya formally joins the World Bank Zero Routine Flaring by 2030 (ZRF) Initiative",
+      "detail": "Signed at World Bank HQ, Washington D.C. Estimated annual loss from flaring at time of joining: ~US$650 million/year.",
+      "source": "Libya Herald / Libya Observer, May 2026"
+    }
+  ]
+}

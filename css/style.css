@@ -1,196 +1,122 @@
-
-
-/* Navbar */
-.navbar-brand {
-    font: 32px Viga;
+:root {
+  --bg: #0f1720;
+  --panel: #18222e;
+  --accent: #ff7a45;
+  --accent-2: #2dd4bf;
+  --text: #e6edf3;
+  --muted: #93a1ab;
+  --border: #2a3744;
 }
 
+* { box-sizing: border-box; }
 
-/* Jumbotron */
-.jumbotron {
-    background: url(../img/jumbotron-bg.jpg);
-    background-size: cover;
-    height: 540px;
-    position: relative;
-    z-index: -1;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-.jumbotron::after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    background-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-    bottom: 0;
+a { color: var(--accent-2); }
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+.topbar h1 { margin: 0; font-size: 1.4em; color: var(--accent); }
+.topbar p { margin: 2px 0 0; color: var(--muted); font-size: 0.9em; }
+.topbar-links a { margin-left: 16px; text-decoration: none; font-size: 0.95em; }
+.topbar-links a:hover { text-decoration: underline; }
+
+.firms-key-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 28px;
+  background: #11181f;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9em;
+}
+.firms-key-bar input[type="text"] {
+  flex: 1 1 240px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+.firms-key-bar button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #1a1208;
+  font-weight: 600;
+  cursor: pointer;
+}
+.firms-key-bar button:hover { opacity: 0.9; }
+.get-key-link { white-space: nowrap; font-size: 0.85em; }
+.firms-status { color: var(--muted); font-size: 0.85em; }
+
+.map-wrap {
+  position: relative;
+  height: 70vh;
+  min-height: 420px;
+}
+#leafletMap { height: 100%; width: 100%; }
+
+.legend {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  background: rgba(24, 34, 46, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  width: 280px;
+  font-size: 0.85em;
+}
+.legend h3 { margin: 0 0 8px; font-size: 1em; color: var(--accent); }
+.legend label { display: block; margin-bottom: 6px; cursor: pointer; }
+.legend-note { color: var(--muted); margin: 8px 0 0; line-height: 1.4; }
+
+.panel {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 36px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.panel h2 { color: var(--accent); }
+.chart-caption { color: var(--muted); font-size: 0.85em; }
+
+#milestones { margin-top: 16px; }
+.milestone {
+  border-left: 3px solid var(--accent-2);
+  padding: 8px 14px;
+  margin-bottom: 10px;
+  background: var(--panel);
+  border-radius: 0 6px 6px 0;
+}
+.milestone .m-date { color: var(--accent-2); font-weight: 600; font-size: 0.85em; }
+
+.source-list { line-height: 1.8; padding-left: 20px; }
+
+.caveat { color: var(--muted); font-size: 0.92em; border-top: 1px dashed var(--border); padding-top: 14px; }
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 0.85em;
 }
 
-.jumbotron .container {
-    color: white;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.jumbotron .display-4 {
-    font-weight: 200;
-    font-size: 2.6em;
-    margin-top: 100px;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    margin-bottom: 50px;
-}
-
-.jumbotron .display-4 span {
-    font-weight: 500;
-}
-
-
-
-/* Info Panel */
-.info-panel {
-    background-color: white;
-    padding: 30px;
-    margin-top: -120px;
-    border-radius: 12px;
-    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
-}
-
-.info-panel h4 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 20px;
-    text-transform: uppercase;
-}
-
-.info-panel p {
-    font-size: 14px;
-    font-weight: lighter;
-    color: #acacac;
-}
-
-
-
-/* Workingspace */
-.workingspace {
-    margin-top: 120px;
-    text-align: center;
-}
-
-.workingspace img {
-    margin-bottom: 20px;
-}
-
-.workingspace h2 {
-    font-size: 52px;
-    text-transform: uppercase;
-    font-weight: 200;
-}
-
-.workingspace h2 span {
-    font-weight: 500;
-}
-
-.workingspace p {
-    font-size: 18px;
-    color: #ACACAC;
-    font-weight: 200;
-}
-
-
-/* Testimonial */
-.testimonial {
-    margin-top: 130px;
-}
-
-.testimonial p {
-    font-size: 1.4em;
-    text-align: center;
-    font-weight: 200;
-    font-style: italic;
-    margin-bottom: 30px;
-}
-
-.testimonial img {
-    width: 80px;
-    height: 80px;
-    margin: 10px;
-    border-radius: 50%;
-    filter: grayscale(1);
-}
-
-.testimonial .img-main {
-    width: 100px;
-    height: 100px;
-    margin-top: -5px;
-    filter: grayscale(0);
-}
-
-.testimonial .info-text h5 {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.testimonial .info-text p {
-    font-size: 12px;
-    margin-top: -5px;
-    color: #acacac;
-    font-style: normal;
-}
-
-
-
-/* Utility */
-.tombol {
-    border-radius: 40px;
-    text-transform: uppercase;
-}
-
-/* RESPONSIVE */
-@media (min-width: 992px) {
-    .navbar {
-        padding-top: 20px;
-    }
-    
-    .navbar-brand, .nav-link {
-        color: white !important;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5)
-    }
-
-    .nav-link {
-        text-transform: uppercase;
-        margin-right: 20px;
-    }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-        content: '';
-        display: block;
-        border-bottom: 3px solid #0B63DC;
-        margin: auto;
-        margin-bottom: -8px;
-        width: 50%;
-        padding-top: 5px;
-    }
-
-
-    .jumbotron {
-        margin-top: -90px;
-        height: 640px;
-    }
-
-    .jumbotron .display-4 {
-        font-size: 5em;
-        margin-top: 150px;
-    }
-
-
-    .workingspace {
-        text-align: left;
-    }
-
-
-    .testimonial p {
-        font-size: 2em;
-    }
-
-}
+.leaflet-popup-content-wrapper { background: var(--panel); color: var(--text); }
+.leaflet-popup-tip { background: var(--panel); }
